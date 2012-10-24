@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8'>
+		<title>Заявка</title>
+	</head>
+	<body style='line-height: 1.5;'>
+		<big><b>Новая заявка!</b></big><br>
+		<b>Ваше имя: *</b> {{formdate.name|title}}<br>
+		<b>Телефон: *</b> {{formdate.tel}}<br>
+		<b>Электронная почта: *</b> {{formdate.email}}<br>
+			<b>Услуга:</b>
+				{% for service in formdate.ch %}
+					{{ service }}{% if forloop.last %}{% else %}, {% endif %}
+				{% endfor %}
+			<br>
+		<b>Сайт:</b> {{formdate.url}}<br>
+		<b>IP:</b> {{ip}}<br>
+		<b>HTTP referer:</b> {{referer}}<br>
+		<b>Сообщение</b>: 
+		<pre style='font-size: 13px;'>{{formdate.msg}}</pre>
+		
+		<hr>
+		<div style='background: #ffe; border: 1px solid silver; padding: 10px; margin: 10px; border-radius: 5px;'>		
+			<p><b>{{ formdate.name|title }}</b>, мы получили Вашу заявку.</p>
+			<p>В течение 24 часов наш специалист свяжется с Вами и вышлет предварительное коммерческое предложение.</p>
+			<p>Спасибо, что выбрали нас!</p>
+			<p>Cостояние Вашей заявки Вы можете уточнить по телефону: {{ filial.phone }}.</p>
+		</div>
+
+	</body>
+</html>

@@ -1,0 +1,74 @@
+# -*- coding: utf-8 -*
+from django.db import models
+from django.utils.translation import ugettext_lazy as _
+from django.utils.safestring import SafeUnicode
+
+
+class Subject(models.Model):
+	title = models.CharField(max_length=512, verbose_name=_('Title'))
+	email = models.CharField(max_length=128, verbose_name=_('E-Mail'))
+	phone = models.CharField(max_length=32, verbose_name=_('Phone'))
+
+	from_name = models.CharField(max_length=128, verbose_name=_('From name'))
+	from_email = models.EmailField(max_length=128, verbose_name=_('From E-Mail'))
+
+	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
+	updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
+
+	class Meta:
+		verbose_name = _('Subject')
+		verbose_name_plural = _('Subjects')
+
+	def __unicode__(self):
+		return SafeUnicode('%s &rarr; %s' % (self.title, self.email))
+
+
+class Mesage(models.Model):
+	name = models.CharField(max_length=512, blank=True, null=True)
+	url = models.URLField(max_length=256, blank=True, null=True)
+	phone = models.CharField(max_length=32, blank=True, null=True)
+	email = models.EmailField(max_length=128, blank=True, null=True)
+	subject = models.ForeignKey(Subject, verbose_name=_('Subject'), null=True, blank=True, related_name='mesages')
+	msg = models.TextField(blank=True, null=True)
+	ip = models.IPAddressField(blank=True, null=True)
+	STATUS_CHOICES = (
+		('error', _('Error')),
+		('send', _('Send')),
+		('read', _('Read')),
+	)
+	status = models.CharField(verbose_name=_('Status'), max_length=32, choices=STATUS_CHOICES)
+	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
+	updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
+
+	def __unicode__(self):
+		return '#%s - %s from %s' % (self.pk, self.subject.title, self.name)
+
+	class Meta:
+		ordering = ['-updated_at']
+		verbose_name = _('Mesage')
+		verbose_name_plural = _('Mesages')
+
+
+# class Field(models.Model):
+# 	type = models.CharField(max_length=512, blank=True, null=True)
+# 	name = models.CharField(max_length=512, blank=True, null=True)
+# 	label = models.CharField(max_length=512, blank=True, null=True)
+
+# 	class Meta:
+# 		verbose_name = _('Field')
+# 		verbose_name_plural = _('Fields')
+
+# 	def __unicode__(self):
+# 		pass
+
+
+# class Form(models.Model):
+# 	name = models.CharField(max_length=512, blank=True, null=True)
+# 	fileds = models.ManyToManyField(Field)
+
+# 	class Meta:
+# 		verbose_name = _('Form')
+# 		verbose_name_plural = _('Forms')
+
+# 	def __unicode__(self):
+# 		pass

@@ -1,0 +1,28 @@
+{%extends 'base.html'%}
+{% block content %}
+
+<div id='sendform'>
+	{%if ok%}
+		<h1>Ваша заявка отправлена</h1>
+		<h3><b>{{ name|title }}</b>, мы получили Вашу заявку.</h3>
+		<p>В течение 24 часов наш специалист свяжется с Вами и вышлет предварительное коммерческое предложение.</p>
+		<p>Спасибо, что выбрали нас!</p>
+		<p>Cостояние Вашей заявки Вы можете уточнить по телефону: {{ mail_filial.phone }}.</p>
+	{%else%}
+		<form method="post" action="">
+			{% csrf_token %}
+			{%if form.errors %}<h3><strong>Сообщение не отправлено!</strong></h3>{% endif %}
+			{{ form.errors }}
+			{{ form.management_form }}
+			{% for field in form %}
+				{{ field.id }}
+				<ul>
+					<li>{{ field.name }}</li>
+					<li>{{ field }}</li>
+				</ul>
+			{% endfor %}
+			<button type="submit">Отправить!</button>
+		</form>
+	{% endif %}
+</div>
+{%endblock%}
