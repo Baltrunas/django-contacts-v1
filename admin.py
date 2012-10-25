@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*
 from django.contrib import admin
-from contact.models import Subject
-from contact.models import Mesage
+from contacts.models import Subject
+from contacts.models import Mesage
 
 
 class SubjectAdmin(admin.ModelAdmin):

@@ -2,7 +2,7 @@
 from django.conf.urls import patterns
 from django.conf.urls import url
 
-urlpatterns = patterns('contact.views',
+urlpatterns = patterns('contacts.views',
 	# contacts
 	url(r'^contacts/$', 'contacts', name='contacts'),
 )

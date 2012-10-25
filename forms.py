@@ -3,7 +3,7 @@ from django.forms.widgets import Input
 from django import forms
 from django.utils.translation import ugettext as _
 from django.forms import ModelForm
-from contact.models import Mesage
+from contacts.models import Mesage
 
 
 class Html5EmailInput(Input):
