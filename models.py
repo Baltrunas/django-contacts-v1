@@ -47,28 +47,3 @@ class Mesage(models.Model):
 		ordering = ['-updated_at']
 		verbose_name = _('Mesage')
 		verbose_name_plural = _('Mesages')
-
-
-# class Field(models.Model):
-# 	type = models.CharField(max_length=512, blank=True, null=True)
-# 	name = models.CharField(max_length=512, blank=True, null=True)
-# 	label = models.CharField(max_length=512, blank=True, null=True)
-
-# 	class Meta:
-# 		verbose_name = _('Field')
-# 		verbose_name_plural = _('Fields')
-
-# 	def __unicode__(self):
-# 		pass
-
-
-# class Form(models.Model):
-# 	name = models.CharField(max_length=512, blank=True, null=True)
-# 	fileds = models.ManyToManyField(Field)
-
-# 	class Meta:
-# 		verbose_name = _('Form')
-# 		verbose_name_plural = _('Forms')
-
-# 	def __unicode__(self):
-# 		pass
