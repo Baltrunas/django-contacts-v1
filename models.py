@@ -24,19 +24,19 @@ class Subject(models.Model):
 
 
 class Mesage(models.Model):
-	name = models.CharField(max_length=512, blank=True, null=True)
-	url = models.URLField(max_length=256, blank=True, null=True)
-	phone = models.CharField(max_length=32, blank=True, null=True)
-	email = models.EmailField(max_length=128, blank=True, null=True)
-	subject = models.ForeignKey(Subject, verbose_name=_('Subject'), null=True, blank=True, related_name='mesages')
-	msg = models.TextField(blank=True, null=True)
-	ip = models.IPAddressField(blank=True, null=True)
+	name = models.CharField(max_length=512, verbose_name=_('Name'))
+	url = models.URLField(max_length=256, blank=True, null=True, verbose_name=_('URL'))
+	phone = models.CharField(max_length=32, blank=True, null=True, verbose_name=_('Phone'))
+	email = models.EmailField(max_length=128, blank=True, null=True, verbose_name=_('E-Mail'))
+	subject = models.ForeignKey(Subject, related_name='mesages', default=1, verbose_name=_('Subject'))
+	msg = models.TextField(blank=True, null=True, verbose_name=_('Mesage'))
+	ip = models.IPAddressField(blank=True, null=True, editable=False, verbose_name=_('IP'))
 	STATUS_CHOICES = (
 		('error', _('Error')),
 		('send', _('Send')),
 		('read', _('Read')),
 	)
-	status = models.CharField(verbose_name=_('Status'), max_length=32, choices=STATUS_CHOICES)
+	status = models.CharField(verbose_name=_('Status'), max_length=32, choices=STATUS_CHOICES, editable=False)
 	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
 	updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
 
