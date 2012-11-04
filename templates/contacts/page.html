@@ -1,26 +1,22 @@
 {%extends 'base.html'%}
 {% block content %}
-<h1>Контакты</h1>
+<h1>{% trans "Contacts" %}</h1>
 <div class='contacts'>
-	<h3>Контактные данные:</h3>
-	<p><b>Тел.</b>: +996 (312) 56-55-88</p>
-	<p><b>E-mail</b>: manager@winnie-pooh.kg</p>
+	<h3>{% trans "Contacts data" %}:</h3>
+	<p><b>{% trans "Phone" %}</b>: +996 (312) 56-55-88</p>
+	<p><b>{% trans "E-mail" %}</b>: manager@winnie-pooh.kg</p>
 
 	<iframe width="380" height="435" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=ru&amp;geocode=&amp;q=%D0%91%D0%B8%D1%88%D0%BA%D0%B5%D0%BA+%D0%B2%D0%B8%D0%BD%D0%B8%D0%BF%D1%83%D1%85&amp;aq=&amp;sll=37.0625,-95.677068&amp;sspn=56.768363,114.169922&amp;ie=UTF8&amp;hq=%D0%B2%D0%B8%D0%BD%D0%B8%D0%BF%D1%83%D1%85&amp;hnear=%D0%91%D0%B8%D1%88%D0%BA%D0%B5%D0%BA,+%D0%9A%D0%B8%D1%80%D0%B3%D0%B8%D0%B7%D0%B8%D1%8F&amp;t=m&amp;ll=42.865648,74.602575&amp;spn=0.027051,0.03253&amp;z=14&amp;output=embed" style='border: 1px solid silver;'></iframe><br />
 	<small><a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=ru&amp;geocode=&amp;q=%D0%91%D0%B8%D1%88%D0%BA%D0%B5%D0%BA+%D0%B2%D0%B8%D0%BD%D0%B8%D0%BF%D1%83%D1%85&amp;aq=&amp;sll=37.0625,-95.677068&amp;sspn=56.768363,114.169922&amp;ie=UTF8&amp;hq=%D0%B2%D0%B8%D0%BD%D0%B8%D0%BF%D1%83%D1%85&amp;hnear=%D0%91%D0%B8%D1%88%D0%BA%D0%B5%D0%BA,+%D0%9A%D0%B8%D1%80%D0%B3%D0%B8%D0%B7%D0%B8%D1%8F&amp;t=m&amp;ll=42.865648,74.602575&amp;spn=0.027051,0.03253&amp;z=14" style="text-align:left:">Просмотреть увеличенную карту</a></small>
-
 </div>
 <div class='contacts'>
 	{%if ok%}
-		{# <h3><b>{{ name|title }}</b>, мы получили Вашу заявку.</h3> #}
-		<p>В течение 24 часов наш специалист свяжется с Вами и вышлет предварительное коммерческое предложение.</p>
-		<p>Спасибо, что выбрали нас!</p>
-		<p>Cостояние Вашей заявки Вы можете уточнить по телефону: {{ mail_filial.phone }}.</p>
+		<h3>{% trans "We received your message!" %}</h3>
 	{%else%}
-		<h3>Отправить сообщение:</h3>
+		<h3>{% trans "Sent message" %}</h3>
 		<form method="post" action="">
 			{% csrf_token %}
-			{%if form.errors %}<h3><strong>Сообщение не отправлено!</strong></h3>{% endif %}
+			{%if form.errors %}<h3><strong>{% trans "The message is not sent!" %}</strong></h3>{% endif %}
 			{{ form.errors }}
 			{{ form.management_form }}
 			{% for field in form %}
@@ -30,7 +26,7 @@
 					<li>{{ field }}</li>
 				</ul>
 			{% endfor %}
-			<input type="submit" value='Отправить!'>
+			<input type="submit" value='{% trans "Send" %}'>
 		</form>
 	{% endif %}
 </div>

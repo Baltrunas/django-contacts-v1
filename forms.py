@@ -22,9 +22,9 @@ class MesageForm(ModelForm):
 
 
 class ContactForm(forms.Form):
-	name = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'required': 'required'}))
-	tel = forms.CharField(max_length=30, widget=forms.TextInput(attrs={'required': 'required'}))
-	email = forms.EmailField(max_length=200, widget=Html5EmailInput(attrs={'required': 'required', 'placeholder': 'Электронная почта *'}))
+	name = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'required': 'required'}))
+	phone = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={'required': 'required'}))
+	email = forms.EmailField(max_length=200, required=True, widget=Html5EmailInput(attrs={'required': 'required', 'placeholder': 'email@example.com'}))
 	url = forms.CharField(required=False, max_length=200, widget=Html5URLInput())
 	SERVICE_CHOICES = (
 		('promo', _('Promo site')),

@@ -5,24 +5,14 @@
 		<title>Contact</title>
 	</head>
 	<body style='line-height: 1.5;'>
-		<p><b>{{ formdate.name|title }}</b>, мы получили Вашу заявку.</p>
-		<p>В течение 24 часов наш специалист свяжется с Вами и вышлет предварительное коммерческое предложение.</p>
-		<p>Спасибо, что выбрали нас!</p>
-		<p>Cостояние Вашей заявки Вы можете уточнить по телефону: {{ filial.phone }}.</p>
+		<p>{% trans "We received your message!" %}</p>
 		<hr>
-		<div style='background: #ffe; border: 1px solid silver; padding: 10px; margin: 10px; border-radius: 5px;'>
-			<b>Ваше имя:</b> {{formdate.name|title}}<br>
-			<b>Контактный телефон:</b> {{formdate.tel}}<br>
-			<b>Электронная почта:</b> {{formdate.email}}<br>
-			<b>Услуга:</b>
-				{% for service in formdate.ch %}
-					{{ service }}{% if forloop.last %}{% else %}, {% endif %}
-				{% endfor %}
-			<br>
-			<b>Сайт:</b> {{formdate.url}}<br>
+			<div style='background: #ffe; border: 1px solid silver; padding: 10px; margin: 10px; border-radius: 5px;'>
+			{% for field in form %}
+				<b>{{ field.label }}:</b> {{formdate|getitem:field.name}}<br>
+			{% endfor %}
 			<b>IP:</b> {{ip}}<br>
-			<b>Сообщение</b>: 
-			<pre style='font-size: 13px;'>{{formdate.msg}}</pre>
+			<b>HTTP referer:</b> {{referer}}<br>
 		</div>
 	</body>
 </html>

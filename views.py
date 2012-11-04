@@ -5,10 +5,8 @@ from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 
 from django.core.mail import EmailMultiAlternatives
-# from django.utils.html import strip_tags
 from django.template import RequestContext
 from contacts.models import Mesage
-from contacts.models import Subject
 from contacts.forms import MesageForm
 
 context = {}
@@ -23,28 +21,25 @@ def contacts(request):
 			context['referer'] = request.META.get('HTTP_REFERER', None)
 			email = context['formdate'].get('email', None)
 
-			# form_subject = Subject.objects.get(pk=context['formdate'].get('subject', 1))
 			form_subject = context['formdate'].get('subject', None)
 			context['form_subject'] = form_subject
 
 			send_from = '%s <%s>' % (form_subject.from_name, form_subject.from_email)
 
-			# user_content = render_to_string('contacts/email_user.html', context)
-			# sendmsg = EmailMultiAlternatives('Мы получили вашу заявку!', user_content, send_from, [email])
-			# sendmsg.attach_alternative(user_content, "text/html")
-			# sendmsg.send()
+			user_content = render_to_string('contacts/email_user.html', context)
+			user_subject = _('We received your message!')
+			sendmsg = EmailMultiAlternatives(user_subject, user_content, send_from, [email])
+			sendmsg.attach_alternative(user_content, "text/html")
+			sendmsg.send()
 
-			# admin_content = render_to_string('contacts/email_admin.html', context)
-			# sendmsg = EmailMultiAlternatives(form_subject.title, admin_content, send_from, [form_subject.email])
-			# sendmsg.attach_alternative(admin_content, "text/html")
-			# sendmsg.send()
-
+			admin_content = render_to_string('contacts/email_admin.html', context)
+			sendmsg = EmailMultiAlternatives(form_subject.title, admin_content, send_from, [form_subject.email])
+			sendmsg.attach_alternative(admin_content, "text/html")
+			sendmsg.send()
 
 			context['ok'] = True
 			context['form'] = MesageForm()
 			context['name'] = context['formdate'].get('name', None)
-			context['title'] = 'Спасибо'
-
 			Mesage(
 				name=context['formdate'].get('name', None),
 				phone=context['formdate'].get('phone', None),
@@ -70,5 +65,5 @@ def contacts(request):
 	else:
 		context['ok'] = False
 		context['form'] = MesageForm()
-		context['title'] = _('Contacts')
+	context['title'] = _('Contacts')
 	return render_to_response('contacts/page.html', context, context_instance=RequestContext(request))
