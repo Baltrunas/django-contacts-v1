@@ -1,5 +1,5 @@
 # Django-Contact
-A simple contact form which outgrowths in contact form generator.
+A simple contact form.
 
 # About
 Simple contact form app.
@@ -12,9 +12,12 @@ Simple contact form app.
 Just use...
 
 # Futures
-* Create form constructors with costom fields
+Create settings for contacts data
 
 # ChangeLog
+## 2012.11.04
+* Rename model, meke translations
+
 ## 2012.10.25
 * Rename to contacts
 
