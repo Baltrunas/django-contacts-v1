@@ -6,15 +6,15 @@ from django.utils.translation import ugettext_lazy as _
 
 from django.core.mail import EmailMultiAlternatives
 from django.template import RequestContext
-from contacts.models import Mesage
-from contacts.forms import MesageForm
+from contacts.models import Message
+from contacts.forms import MessageForm
 
 context = {}
 
 
 def contacts(request):
 	if request.method == 'POST':
-		context['form'] = MesageForm(request.POST)
+		context['form'] = MessageForm(request.POST)
 		if context['form'].is_valid():
 			context['formdate'] = context['form'].cleaned_data
 			context['ip'] = request.META.get('REMOTE_ADDR', None)
@@ -38,9 +38,9 @@ def contacts(request):
 			sendmsg.send()
 
 			context['ok'] = True
-			context['form'] = MesageForm()
+			context['form'] = MessageForm()
 			context['name'] = context['formdate'].get('name', None)
-			Mesage(
+			Message(
 				name=context['formdate'].get('name', None),
 				phone=context['formdate'].get('phone', None),
 				email=context['formdate'].get('email', None),
@@ -52,7 +52,7 @@ def contacts(request):
 			).save()
 		else:
 			context['formdate'] = context['form'].cleaned_data
-			Mesage(
+			Message(
 				name=context['formdate'].get('name', None),
 				phone=context['formdate'].get('phone', None),
 				email=context['formdate'].get('email', None),
@@ -64,6 +64,6 @@ def contacts(request):
 			).save()
 	else:
 		context['ok'] = False
-		context['form'] = MesageForm()
+		context['form'] = MessageForm()
 	context['title'] = _('Contacts')
 	return render_to_response('contacts/page.html', context, context_instance=RequestContext(request))

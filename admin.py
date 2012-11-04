@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*
 from django.contrib import admin
 from contacts.models import Subject
-from contacts.models import Mesage
+from contacts.models import Message
 
 
 class SubjectAdmin(admin.ModelAdmin):
@@ -13,10 +13,10 @@ class SubjectAdmin(admin.ModelAdmin):
 admin.site.register(Subject, SubjectAdmin)
 
 
-class MesageAdmin(admin.ModelAdmin):
+class MessageAdmin(admin.ModelAdmin):
 	list_display = ('id', 'name', 'phone', 'email', 'url', 'status', 'msg', 'ip', 'updated_at')
 	search_fields = ('id', 'name', 'phone', 'email', 'url', 'status', 'msg', 'ip', 'updated_at')
 	list_filter = ['updated_at', 'status']
 	ordering = ['-updated_at']
 
-admin.site.register(Mesage, MesageAdmin)
+admin.site.register(Message, MessageAdmin)

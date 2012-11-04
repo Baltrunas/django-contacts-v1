@@ -20,13 +20,13 @@ class Subject(models.Model):
 		return self.title
 
 
-class Mesage(models.Model):
+class Message(models.Model):
 	name = models.CharField(max_length=512, verbose_name=_('Name'))
 	url = models.URLField(max_length=256, blank=True, null=True, verbose_name=_('URL'), editable=False)
 	phone = models.CharField(max_length=32, verbose_name=_('Phone'))
 	email = models.EmailField(max_length=128, verbose_name=_('E-Mail'))
-	subject = models.ForeignKey(Subject, related_name='mesages', default=1, verbose_name=_('Subject'))
-	msg = models.TextField(blank=True, null=True, verbose_name=_('Mesage'))
+	subject = models.ForeignKey(Subject, related_name='messages', default=1, verbose_name=_('Subject'))
+	msg = models.TextField(blank=True, null=True, verbose_name=_('Message'))
 	ip = models.IPAddressField(blank=True, null=True, editable=False, verbose_name=_('IP'))
 	STATUS_CHOICES = (
 		('error', _('Error')),
@@ -42,5 +42,5 @@ class Mesage(models.Model):
 
 	class Meta:
 		ordering = ['-updated_at']
-		verbose_name = _('Mesage')
-		verbose_name_plural = _('Mesages')
+		verbose_name = _('Message')
+		verbose_name_plural = _('Messages')
