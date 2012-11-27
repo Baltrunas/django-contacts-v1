@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-04 12:45+0400\n"
+"POT-Creation-Date: 2012-11-27 21:04+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -123,18 +123,3 @@ msgstr "Отправить сообщение"
 #: templates/contacts/page.html:20
 msgid "The message is not sent!"
 msgstr "Сообщение небыло отправленно!"
-
-#~ msgid "Promo"
-#~ msgstr "Продвижение"
-
-#~ msgid "Context"
-#~ msgstr "Контекстная реклама"
-
-#~ msgid "Make"
-#~ msgstr "Создание сайтов"
-
-#~ msgid "Service"
-#~ msgstr "Услуги"
-
-#~ msgid "Contact Log"
-#~ msgstr "Заявка"
