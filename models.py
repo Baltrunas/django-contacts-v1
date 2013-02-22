@@ -44,3 +44,39 @@ class Message(models.Model):
 		ordering = ['-updated_at']
 		verbose_name = _('Message')
 		verbose_name_plural = _('Messages')
+
+
+class CallBack(models.Model):
+	SALUTATION_CHOICES = (
+		('mr', _('Mr.')),
+		('ms', _('Mis.')),
+	)
+	salutation = models.CharField(verbose_name=_('Salutation'), max_length=32, choices=SALUTATION_CHOICES)
+	first_name = models.CharField(max_length=128, verbose_name=_('First Name'))
+	last_name = models.CharField(max_length=128, verbose_name=_('Last Name'))
+	subject = models.ForeignKey(Subject, related_name='messages', default=1, verbose_name=_('Subject'))
+	phone = models.CharField(max_length=32, verbose_name=_('Phone'))
+	from_time = models.TimeField(verbose_name=_('From Time'))
+	to_time = models.TimeField(verbose_name=_('To Time'))
+	msg = models.TextField(blank=True, null=True, verbose_name=_('Message'))
+
+	ip = models.IPAddressField(blank=True, null=True, editable=False, verbose_name=_('IP'))
+	STATUS_CHOICES = (
+		('wait', _('Wait')),
+		('in_process', _('In Process')),
+		('error', _('Error')),
+		('rejected', _('Rejected')),
+		('finish', _('Finish')),
+	)
+	status = models.CharField(verbose_name=_('Status'), max_length=32, choices=STATUS_CHOICES, editable=False)
+	note = models.TextField(blank=True, null=True, verbose_name=_('Note'))
+	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
+	updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
+
+	def __unicode__(self):
+		return '#%s - %s from %s' % (self.pk, self.subject.title, self.name)
+
+	class Meta:
+		ordering = ['-updated_at']
+		verbose_name = _('Call Back')
+		verbose_name_plural = _('Call Backs')
