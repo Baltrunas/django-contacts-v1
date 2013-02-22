@@ -4,5 +4,6 @@ from django.conf.urls import url
 
 urlpatterns = patterns('contacts.views',
 	# contacts
-	url(r'^contacts/$', 'contacts', name='contacts'),
+	url(r'^$', 'contacts', name='contacts'),
+	url(r'^callback/$', 'callback', name='callback'),
 )

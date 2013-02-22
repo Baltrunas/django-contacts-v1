@@ -54,7 +54,7 @@ class CallBack(models.Model):
 	salutation = models.CharField(verbose_name=_('Salutation'), max_length=32, choices=SALUTATION_CHOICES)
 	first_name = models.CharField(max_length=128, verbose_name=_('First Name'))
 	last_name = models.CharField(max_length=128, verbose_name=_('Last Name'))
-	subject = models.ForeignKey(Subject, related_name='messages', default=1, verbose_name=_('Subject'))
+	subject = models.ForeignKey(Subject, related_name='callbacks', default=1, verbose_name=_('Subject'))
 	phone = models.CharField(max_length=32, verbose_name=_('Phone'))
 	from_time = models.TimeField(verbose_name=_('From Time'))
 	to_time = models.TimeField(verbose_name=_('To Time'))
@@ -74,7 +74,7 @@ class CallBack(models.Model):
 	updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
 
 	def __unicode__(self):
-		return '#%s - %s from %s' % (self.pk, self.subject.title, self.name)
+		return '#%s - %s from %s %s' % (self.pk, self.subject.title, self.last_name, self.first_name)
 
 	class Meta:
 		ordering = ['-updated_at']

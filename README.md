@@ -6,7 +6,7 @@ Simple contact form app.
 
 # Install
 * Add to INSTALLED_APPS 'contacts',
-* Add to urls.py url(r'^', include('contacts.urls')),
+* Add to urls.py url(r'^contacts/', include('contacts.urls')),
 
 # Fow to use
 Just use...

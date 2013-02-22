@@ -2,6 +2,7 @@
 from django.contrib import admin
 from contacts.models import Subject
 from contacts.models import Message
+from contacts.models import CallBack
 
 
 class SubjectAdmin(admin.ModelAdmin):
@@ -20,3 +21,13 @@ class MessageAdmin(admin.ModelAdmin):
 	ordering = ['-updated_at']
 
 admin.site.register(Message, MessageAdmin)
+
+
+class CallBackAdmin(admin.ModelAdmin):
+	list_display = ['first_name', 'last_name', 'subject', 'phone', 'from_time', 'to_time', 'ip', 'status']
+	search_fields = ['first_name', 'last_name', 'subject', 'phone', 'from_time', 'to_time', 'ip', 'status']
+	list_filter = ['subject', 'phone', 'from_time', 'to_time', 'ip', 'status']
+	# list_editable = ['status']
+	ordering = ['-updated_at']
+
+admin.site.register(CallBack, CallBackAdmin)

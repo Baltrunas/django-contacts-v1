@@ -4,6 +4,7 @@ from django import forms
 from django.utils.translation import ugettext as _
 from django.forms import ModelForm
 from contacts.models import Message
+from contacts.models import CallBack
 
 
 class Html5EmailInput(Input):
@@ -19,6 +20,12 @@ class Html5URLInput(Input):
 class MessageForm(ModelForm):
 	class Meta:
 		model = Message
+
+
+class CallBackForm(ModelForm):
+	class Meta:
+		model = CallBack
+		fields = ['salutation', 'last_name', 'first_name', 'subject', 'phone', 'from_time', 'to_time', 'msg']
 
 
 class ContactForm(forms.Form):
