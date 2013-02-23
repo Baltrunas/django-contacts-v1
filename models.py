@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.sites.models import Site
 
 
 class Subject(models.Model):
@@ -68,7 +69,7 @@ class CallBack(models.Model):
 		('rejected', _('Rejected')),
 		('finish', _('Finish')),
 	)
-	status = models.CharField(verbose_name=_('Status'), max_length=32, choices=STATUS_CHOICES, editable=False)
+	status = models.CharField(verbose_name=_('Status'), max_length=32, choices=STATUS_CHOICES)
 	note = models.TextField(blank=True, null=True, verbose_name=_('Note'))
 	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
 	updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
@@ -80,3 +81,71 @@ class CallBack(models.Model):
 		ordering = ['-updated_at']
 		verbose_name = _('Call Back')
 		verbose_name_plural = _('Call Backs')
+
+
+class Region(models.Model):
+	name = models.CharField(verbose_name=_('Name'), max_length=128)
+	slug = models.SlugField(verbose_name=_('Slug'), max_length=128, help_text=_('A slug is the part of a URL which identifies a page using human-readable keywords'))
+	code = models.PositiveIntegerField(verbose_name=_('Code'), default=500)
+
+	TYPE_CHOICES = (
+		('city', _('City')),
+		('state', _('State')),
+		('country', _('Country')),
+		('region', _('Region')),
+	)
+	region_type = models.CharField(verbose_name=_('Status'), max_length=32, choices=TYPE_CHOICES)
+
+	def __unicode__(self):
+		return self.name
+
+	class Meta:
+		ordering = ['name']
+		verbose_name = _('Region')
+		verbose_name_plural = _('Regions')
+
+
+class Office(models.Model):
+	name = models.CharField(verbose_name=_('Name'), max_length=128)
+	description = models.TextField(verbose_name=_('Description'), blank=True, null=True)
+
+	phone = models.CharField(verbose_name=_('Phone'), max_length=64, default='+7 (000) 000-00-00')
+	email = models.CharField(verbose_name=_('E-mail'), max_length=128, default='email@mail.com')
+	address = models.TextField(verbose_name=_('Address'), blank=True)
+
+	www = models.URLField(verbose_name=_('WWW'), max_length=64, default='http://glav.it/')
+
+	photo = models.ImageField(verbose_name=_('Photo'), upload_to='img/office', blank=True)
+
+	# страны
+	# штат
+	# города
+	# регионы
+	city = models.ForeignKey(Region, verbose_name=_('City'), limit_choices_to={'region_type': 'city'})
+
+	# параметры
+	#	имя
+	#	значение
+	#	тип
+
+	sites = models.ManyToManyField(Site, related_name='offices', verbose_name=_('Sites'))
+
+	latitude = models.DecimalField(verbose_name=_('Latitude'), max_digits=19, decimal_places=15)			# Широта
+	longitude = models.DecimalField(verbose_name=_('Longitude'), max_digits=19, decimal_places=15)		# Долгота
+
+	counter = models.TextField(verbose_name=_('Counter'), blank=True)
+
+	order = models.PositiveSmallIntegerField(verbose_name=_('Order'), default=500)
+	main = models.BooleanField(verbose_name=_('Main'), default=True)
+
+	public = models.BooleanField(verbose_name=_('Public'), default=True)
+	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
+	updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
+
+	def __unicode__(self):
+		return self.name
+
+	class Meta:
+		ordering = ['order', 'name']
+		verbose_name = _('Office')
+		verbose_name_plural = _('Offices')

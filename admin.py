@@ -1,8 +1,14 @@
 # -*- coding: utf-8 -*
 from django.contrib import admin
+
 from contacts.models import Subject
 from contacts.models import Message
 from contacts.models import CallBack
+
+from contacts.models import Region
+from contacts.models import Office
+
+from django.contrib.sites.models import Site
 
 
 class SubjectAdmin(admin.ModelAdmin):
@@ -31,3 +37,25 @@ class CallBackAdmin(admin.ModelAdmin):
 	ordering = ['-updated_at']
 
 admin.site.register(CallBack, CallBackAdmin)
+
+
+def __unicode__(self):
+	return self.name
+
+Site.__unicode__ = __unicode__
+
+
+class RegionAdmin(admin.ModelAdmin):
+	list_display = ('name', 'slug', 'code')
+	search_fields = ('name', 'slug', 'code')
+
+admin.site.register(Region, RegionAdmin)
+
+
+class OfficeAdmin(admin.ModelAdmin):
+	list_display = ('name', 'city', 'email', 'address', 'order', 'public', 'main')
+	search_fields = ('name', 'city', 'sites', 'email', 'address', 'order', 'public', 'main')
+	list_editable = ['order', 'public', 'main']
+	list_filter = ['public', 'main']
+
+admin.site.register(Office, OfficeAdmin)
