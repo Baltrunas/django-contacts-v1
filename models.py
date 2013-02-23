@@ -109,11 +109,11 @@ class Office(models.Model):
 	name = models.CharField(verbose_name=_('Name'), max_length=128)
 	description = models.TextField(verbose_name=_('Description'), blank=True, null=True)
 
-	phone = models.CharField(verbose_name=_('Phone'), max_length=64, default='+7 (000) 000-00-00')
-	email = models.CharField(verbose_name=_('E-mail'), max_length=128, default='email@mail.com')
-	address = models.TextField(verbose_name=_('Address'), blank=True)
+	phone = models.CharField(verbose_name=_('Phone'), max_length=64, default='+7 (000) 000-00-00', blank=True, null=True)
+	email = models.CharField(verbose_name=_('E-mail'), max_length=128, default='email@mail.com', blank=True, null=True)
+	address = models.CharField(verbose_name=_('Address'), max_length=2048, blank=True)
 
-	www = models.URLField(verbose_name=_('WWW'), max_length=64, default='http://glav.it/')
+	www = models.URLField(verbose_name=_('WWW'), max_length=64, default='http://glav.it/', blank=True, null=True)
 
 	photo = models.ImageField(verbose_name=_('Photo'), upload_to='img/office', blank=True)
 
@@ -121,7 +121,7 @@ class Office(models.Model):
 	# штат
 	# города
 	# регионы
-	city = models.ForeignKey(Region, verbose_name=_('City'), limit_choices_to={'region_type': 'city'})
+	# city = models.ForeignKey(Region, verbose_name=_('City'), limit_choices_to={'region_type': 'city'})
 
 	# параметры
 	#	имя
@@ -130,10 +130,8 @@ class Office(models.Model):
 
 	sites = models.ManyToManyField(Site, related_name='offices', verbose_name=_('Sites'))
 
-	latitude = models.DecimalField(verbose_name=_('Latitude'), max_digits=19, decimal_places=15)			# Широта
-	longitude = models.DecimalField(verbose_name=_('Longitude'), max_digits=19, decimal_places=15)		# Долгота
-
-	counter = models.TextField(verbose_name=_('Counter'), blank=True)
+	latitude = models.DecimalField(verbose_name=_('Latitude'), max_digits=19, decimal_places=15, blank=True, null=True)			# Широта
+	longitude = models.DecimalField(verbose_name=_('Longitude'), max_digits=19, decimal_places=15, blank=True, null=True)		# Долгота
 
 	order = models.PositiveSmallIntegerField(verbose_name=_('Order'), default=500)
 	main = models.BooleanField(verbose_name=_('Main'), default=True)
@@ -141,6 +139,12 @@ class Office(models.Model):
 	public = models.BooleanField(verbose_name=_('Public'), default=True)
 	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
 	updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
+
+	def get_latitude(self):
+		return '%s' % self.latitude
+
+	def get_longitude(self):
+		return '%s' % self.longitude
 
 	def __unicode__(self):
 		return self.name

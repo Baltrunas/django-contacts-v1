@@ -6,14 +6,19 @@ from django.utils.translation import ugettext_lazy as _
 
 from django.core.mail import EmailMultiAlternatives
 from django.template import RequestContext
+
 from contacts.models import Message
 from contacts.models import CallBack
+from contacts.models import Office
+
 from contacts.forms import MessageForm
 from contacts.forms import CallBackForm
 
 
 def contacts(request):
 	context = {}
+	context['offices'] = Office.objects.all()
+
 	if request.method == 'POST':
 		context['form'] = MessageForm(request.POST)
 		if context['form'].is_valid():

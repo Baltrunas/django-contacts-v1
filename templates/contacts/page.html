@@ -1,14 +1,68 @@
 {%extends 'base.html'%}
 {% load i18n %}
 {% block content %}
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdwTljqbO8MACG37C3oQqjXtYPYv4r8Ag&sensor=true"></script>
+{# <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/src/infobox.js"></script> #}
+
+<script type="text/javascript">
+	var offices = [];
+
+	function initialize() {
+		var mapOptions = {
+			zoom: 12,
+			center: new google.maps.LatLng(52.512877944290010, 13.444519042968750),
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		}
+		var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+		setMarkers(map, offices);
+	}
+
+	function setMarkers(map, locations) {
+		for (var i = 0; i < locations.length; i++) {
+			var office = locations[i];
+			var myLatLng = new google.maps.LatLng(office[1], office[2]);
+			var marker = new google.maps.Marker({
+				position: myLatLng,
+				map: map,
+				// shadow: shadow,
+				// draggable: true,
+				// icon: image,
+				// shape: shape,
+				title: office[0],
+				// text: 'sdfsdfsf',
+				zIndex: office[3]
+			});
+		}
+	}
+</script>
+
 <h1>{% trans "Contacts" %}</h1>
-<div class='contacts'>
-	<h3>{% trans "Contacts data" %}:</h3>
-	<p><b>{% trans "Phone" %}</b>: +996 (312) 56-55-88</p>
-	<p><b>{% trans "E-Mail" %}</b>: pooh0312@mail.ru</p>
-	<img src="/templates/img/map.png" alt="">
+	<div class="b-contacts-offices">
+	{% for office in offices %}
+		<div class="b-contacts-offices__office {% if office.main %}b-contacts-offices__office__main{% endif %}">
+			<h3>{{ office.name }}</h3>
+			<dig>{% trans "Contacts data" %}:</dig>
+
+			{% if office.photo %}
+				<img src="{{ office.photo.url }}" alt="{{ office.name }}" class='b-contacts-office__photo'>
+			{% endif %}
+
+			<p>{% trans "Description" %}: {{ office.description }}</p>
+			<p>{% trans "Phone" %}: {{ office.phone }}</p>
+			<p>{% trans "E-Mail" %}: {{ office.email }}</p>
+			<p>{% trans "Address" %}: {{ office.address }}</p>
+			<p>{% trans "WWW" %}: {{ office.www }}</p>
+
+			<script>
+				offices.push(['{{ office.name }}', {{ office.get_latitude }}, {{ office.get_longitude }}, {{ forloop.counter }}]);
+			</script>
+		</div>
+	{% endfor %}
 </div>
-<div class='contacts'>
+
+
+<div class='b-contacts-form'>
 	{%if ok%}
 		<h3>{% trans "We received your message!" %}</h3>
 	{%else%}
@@ -29,4 +83,14 @@
 		</form>
 	{% endif %}
 </div>
+
+
+<div class='b-contacts-map' id='map_canvas'></div>
+<script>initialize();</script>
+
+
+<style>
+	aside {display: none;}
+	section {width: 100%;}
+</style>
 {%endblock%}

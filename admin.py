@@ -53,8 +53,8 @@ admin.site.register(Region, RegionAdmin)
 
 
 class OfficeAdmin(admin.ModelAdmin):
-	list_display = ('name', 'city', 'email', 'address', 'order', 'public', 'main')
-	search_fields = ('name', 'city', 'sites', 'email', 'address', 'order', 'public', 'main')
+	list_display = ('name', 'email', 'address', 'order', 'public', 'main')
+	search_fields = ('name', 'sites', 'email', 'address', 'order', 'public', 'main')
 	list_editable = ['order', 'public', 'main']
 	list_filter = ['public', 'main']
 
