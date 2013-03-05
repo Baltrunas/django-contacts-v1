@@ -42,17 +42,26 @@
 	{% for office in offices %}
 		<div class="b-contacts-offices__office {% if office.main %}b-contacts-offices__office__main{% endif %}">
 			<h3>{{ office.name }}</h3>
-			<dig>{% trans "Contacts data" %}:</dig>
+			<h4>{% trans "Contacts data" %}:</h4>
 
 			{% if office.photo %}
 				<img src="{{ office.photo.url }}" alt="{{ office.name }}" class='b-contacts-office__photo'>
 			{% endif %}
 
-			<p>{% trans "Description" %}: {{ office.description }}</p>
-			<p>{% trans "Phone" %}: {{ office.phone }}</p>
-			<p>{% trans "E-Mail" %}: {{ office.email }}</p>
-			<p>{% trans "Address" %}: {{ office.address }}</p>
-			<p>{% trans "WWW" %}: {{ office.www }}</p>
+			{% if office.description %}<p>{{ office.description }}</p>{% endif %}
+
+			{% if office.phone %}
+				<p>{% trans "Phone" %}: {{ office.phone }}</p>
+			{% endif %}
+			{% if office.email %}
+				<p>{% trans "E-Mail" %}: {{ office.email }}</p>
+			{% endif %}
+			{% if office.address %}
+				<p>{% trans "Address" %}: {{ office.address }}</p>
+			{% endif %}
+			{% if office.www %}
+				<p>{% trans "WWW" %}: {{ office.www }}</p>
+			{% endif %}
 
 			<script>
 				offices.push(['{{ office.name }}', {{ office.get_latitude }}, {{ office.get_longitude }}, {{ forloop.counter }}]);

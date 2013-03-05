@@ -1,0 +1,71 @@
+
+.b-callback-link
+{
+	float: right;
+	position: relative;
+	top: 40px;
+	left: 100px;
+}
+
+
+.b-contacts-offices
+{
+	width: 630px;
+	float: left;
+}
+
+.b-contacts-offices__office
+{
+	/*border: 1px solid silver;*/
+	height: 280px;
+}
+
+.b-contacts-offices__office__main
+{
+	/*border-color: green;*/
+}
+
+.b-contacts-office__photo
+{
+	box-shadow: inset 0 0 10px #fff;
+	/*width: 300px;*/
+	height: 200px;
+	border-radius: 5px;
+	float: right;
+}
+
+.b-contacts-map
+{
+	margin-top: 30px;
+	width: 630px;
+	height: 350px;
+	display: block;
+	border: 1px solid silver;
+	border-radius: 3px;
+}
+
+.b-contacts-form
+{
+	width: 300px;
+	float: right;
+}
+
+.b-contacts-form ul
+{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.b-contacts-form ul li
+{
+	padding: 5px;
+}
+
+.b-contacts-form ul input,
+.b-contacts-form ul select,
+.b-contacts-form ul textarea
+{
+	width: 290px;
+	font-size: 14px;
+}
