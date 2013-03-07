@@ -17,12 +17,18 @@
 .b-contacts-offices__office
 {
 	/*border: 1px solid silver;*/
-	height: 280px;
+	/*height: 280px;*/
 }
 
 .b-contacts-offices__office__main
 {
 	/*border-color: green;*/
+}
+
+.b-contacts-office__description
+{
+	font-size: 18px;
+	margin-bottom: 30px;
 }
 
 .b-contacts-office__photo
@@ -34,6 +40,12 @@
 	float: right;
 }
 
+/*
+ **************************
+ * =MAP
+ **************************
+*/
+
 .b-contacts-map
 {
 	margin-top: 30px;
@@ -42,12 +54,21 @@
 	display: block;
 	border: 1px solid silver;
 	border-radius: 3px;
+	margin-bottom: 40px;
 }
+
+/*
+ **************************
+ * =FORM
+ **************************
+*/
 
 .b-contacts-form
 {
 	width: 300px;
 	float: right;
+	clear: right;
+	margin-bottom: 40px;
 }
 
 .b-contacts-form ul

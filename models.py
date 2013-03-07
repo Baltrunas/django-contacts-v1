@@ -117,17 +117,6 @@ class Office(models.Model):
 
 	photo = models.ImageField(verbose_name=_('Photo'), upload_to='img/office', blank=True)
 
-	# страны
-	# штат
-	# города
-	# регионы
-	# city = models.ForeignKey(Region, verbose_name=_('City'), limit_choices_to={'region_type': 'city'})
-
-	# параметры
-	#	имя
-	#	значение
-	#	тип
-
 	sites = models.ManyToManyField(Site, related_name='offices', verbose_name=_('Sites'))
 
 	latitude = models.DecimalField(verbose_name=_('Latitude'), max_digits=19, decimal_places=15, blank=True, null=True)			# Широта

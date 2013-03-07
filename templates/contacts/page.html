@@ -44,11 +44,14 @@
 			<h3>{{ office.name }}</h3>
 			<h4>{% trans "Contacts data" %}:</h4>
 
+
+			{% if office.description %}
+				<p class='b-contacts-office__description'>{{ office.description }}</p>
+			{% endif %}
+
 			{% if office.photo %}
 				<img src="{{ office.photo.url }}" alt="{{ office.name }}" class='b-contacts-office__photo'>
 			{% endif %}
-
-			{% if office.description %}<p>{{ office.description }}</p>{% endif %}
 
 			{% if office.phone %}
 				<p>{% trans "Phone" %}: {{ office.phone }}</p>
@@ -63,9 +66,15 @@
 				<p>{% trans "WWW" %}: {{ office.www }}</p>
 			{% endif %}
 
-			<script>
-				offices.push(['{{ office.name }}', {{ office.get_latitude }}, {{ office.get_longitude }}, {{ forloop.counter }}]);
-			</script>
+			{% if office.latitude and office.longitude %}
+				<script>
+					offices.push(['{{ office.name }}', {{ office.get_latitude }}, {{ office.get_longitude }}, {{ forloop.counter }}]);
+				</script>
+
+				<div class='b-contacts-map' id='map_canvas'></div>
+				<script>initialize();</script>
+			{% endif %}
+
 		</div>
 	{% endfor %}
 </div>
@@ -92,11 +101,6 @@
 		</form>
 	{% endif %}
 </div>
-
-
-<div class='b-contacts-map' id='map_canvas'></div>
-<script>initialize();</script>
-
 
 <style>
 	aside {display: none;}
