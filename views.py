@@ -79,9 +79,9 @@ def callback(request):
 	context = {}
 	if request.method == 'POST':
 		context['form'] = CallBackForm(request.POST)
+		context['ip'] = request.META.get('REMOTE_ADDR', None)
 		if context['form'].is_valid():
 			context['formdate'] = context['form'].cleaned_data
-			context['ip'] = request.META.get('REMOTE_ADDR', None)
 			form_subject = context['formdate'].get('subject', None)
 			context['form_subject'] = form_subject
 
