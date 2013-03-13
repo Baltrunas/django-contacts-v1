@@ -57,8 +57,8 @@ class CallBack(models.Model):
 	last_name = models.CharField(max_length=128, verbose_name=_('Last Name'))
 	subject = models.ForeignKey(Subject, related_name='callbacks', default=1, verbose_name=_('Subject'))
 	phone = models.CharField(max_length=32, verbose_name=_('Phone'))
-	from_time = models.TimeField(verbose_name=_('From Time'))
-	to_time = models.TimeField(verbose_name=_('To Time'))
+	from_time = models.TimeField(verbose_name=_('From Time'), blank=True, null=True)
+	to_time = models.TimeField(verbose_name=_('To Time'), blank=True, null=True)
 	msg = models.TextField(blank=True, null=True, verbose_name=_('Message'))
 
 	ip = models.IPAddressField(blank=True, null=True, editable=False, verbose_name=_('IP'))

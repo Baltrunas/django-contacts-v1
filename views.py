@@ -108,19 +108,22 @@ def callback(request):
 				status='wait'
 			).save()
 		else:
-			context['formdate'] = context['form'].cleaned_data
-			CallBack(
-				salutation=context['formdate'].get('salutation', None),
-				first_name=context['formdate'].get('first_name', None),
-				last_name=context['formdate'].get('last_name', None),
-				subject=context['formdate'].get('subject', None),
-				phone=context['formdate'].get('phone', None),
-				from_time=context['formdate'].get('from_time', None),
-				to_time=context['formdate'].get('to_time', None),
-				msg=context['formdate'].get('msg', None),
-				ip=context['ip'],
-				status='error'
-			).save()
+			try:
+				context['formdate'] = context['form'].cleaned_data
+				CallBack(
+					salutation=context['formdate'].get('salutation', None),
+					first_name=context['formdate'].get('first_name', None),
+					last_name=context['formdate'].get('last_name', None),
+					subject=context['formdate'].get('subject', None),
+					phone=context['formdate'].get('phone', None),
+					from_time=context['formdate'].get('from_time', None),
+					to_time=context['formdate'].get('to_time', None),
+					msg=context['formdate'].get('msg', None),
+					ip=context['ip'],
+					status='error'
+				).save()
+			else:
+				pass
 	else:
 		context['ok'] = False
 		context['form'] = CallBackForm()
