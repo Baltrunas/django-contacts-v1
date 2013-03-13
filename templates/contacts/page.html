@@ -46,7 +46,7 @@
 
 
 			{% if office.description %}
-				<p class='b-contacts-office__description'>{{ office.description }}</p>
+				<p class='b-contacts-office__description'>{{ office.description|safe }}</p>
 			{% endif %}
 
 			{% if office.photo %}
