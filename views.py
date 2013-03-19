@@ -122,7 +122,7 @@ def callback(request):
 					ip=context['ip'],
 					status='error'
 				).save()
-			else:
+			except:
 				pass
 	else:
 		context['ok'] = False
