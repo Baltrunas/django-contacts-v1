@@ -16,94 +16,93 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: forms.py:37
 msgid "Promo site"
-msgstr "Продвижение сайта"
+msgstr ""
 
 #: forms.py:38
 msgid "Context ads"
-msgstr "Контекстная реклама"
+msgstr ""
 
 #: forms.py:39
 msgid "Make site"
-msgstr "Создание сайта"
+msgstr ""
 
 #: models.py:8
 msgid "Title"
-msgstr "Заголовок"
+msgstr ""
 
 #: models.py:9 models.py:28 templates/contacts/page.html:60
 msgid "E-Mail"
-msgstr "E-Mail"
+msgstr ""
 
 #: models.py:10 models.py:27 models.py:59 models.py:112
 #: templates/contacts/page.html:57
 msgid "Phone"
-msgstr "Телефон"
+msgstr ""
 
 #: models.py:11
 msgid "From name"
-msgstr "От имени"
+msgstr ""
 
 #: models.py:12
 msgid "From E-Mail"
-msgstr "От E-Mail"
+msgstr ""
 
 #: models.py:13 models.py:38 models.py:74 models.py:129
 msgid "Created At"
-msgstr "Создано"
+msgstr ""
 
 #: models.py:14 models.py:39 models.py:75 models.py:130
 msgid "Updated At"
-msgstr "Обновлено"
+msgstr ""
 
 #: models.py:17 models.py:29 models.py:58
 msgid "Subject"
-msgstr "Тема"
+msgstr ""
 
 #: models.py:18
 msgid "Subjects"
-msgstr "Темы"
+msgstr ""
 
 #: models.py:25 models.py:87 models.py:109
 msgid "Name"
-msgstr "Имя"
+msgstr ""
 
 #: models.py:26
 msgid "URL"
-msgstr "URL"
+msgstr ""
 
 #: models.py:30 models.py:46 models.py:62
 msgid "Message"
-msgstr "Сообщение"
+msgstr ""
 
 #: models.py:31 models.py:64
 msgid "IP"
-msgstr "IP"
+msgstr ""
 
 #: models.py:33 models.py:68
 msgid "Error"
-msgstr "Ошибка"
+msgstr ""
 
 #: models.py:34 templates/contacts/callback.html:25
 #: templates/contacts/page.html:100
 msgid "Send"
-msgstr "Отправить"
+msgstr ""
 
 #: models.py:35
 msgid "Read"
-msgstr "Прочитанное"
+msgstr ""
 
 #: models.py:37 models.py:72 models.py:97
 msgid "Status"
-msgstr "Статус"
+msgstr ""
 
 #: models.py:47
 msgid "Messages"
-msgstr "Сообщения"
+msgstr ""
 
 #: models.py:52
 msgid "Mr."
@@ -122,14 +121,12 @@ msgid "First Name"
 msgstr ""
 
 #: models.py:57
-#, fuzzy
 msgid "Last Name"
-msgstr "Имя"
+msgstr ""
 
 #: models.py:60
-#, fuzzy
 msgid "From Time"
-msgstr "От имени"
+msgstr ""
 
 #: models.py:61
 msgid "To Time"
@@ -182,9 +179,8 @@ msgid "City"
 msgstr ""
 
 #: models.py:93
-#, fuzzy
 msgid "State"
-msgstr "Статус"
+msgstr ""
 
 #: models.py:94
 msgid "Country"
@@ -253,20 +249,20 @@ msgstr ""
 #: views.py:36 templates/contacts/callback.html:10
 #: templates/contacts/email_user.html:9 templates/contacts/page.html:85
 msgid "We received your message!"
-msgstr "Мы получили ваше сообщение!"
+msgstr ""
 
 #: views.py:74 templates/contacts/page.html:40
 msgid "Contacts"
-msgstr "Контакты"
+msgstr ""
 
 #: templates/contacts/callback.html:15 templates/contacts/page.html:90
 msgid "The message is not sent!"
-msgstr "Сообщение небыло отправленно!"
+msgstr ""
 
 #: templates/contacts/page.html:45
 msgid "Contacts data"
-msgstr "Контактные данные"
+msgstr ""
 
 #: templates/contacts/page.html:87
 msgid "Sent message"
-msgstr "Отправить сообщение"
+msgstr ""
