@@ -10,8 +10,8 @@
 
 	function initialize() {
 		var mapOptions = {
-			zoom: 12,
-			center: new google.maps.LatLng(52.512877944290010, 13.444519042968750),
+			zoom: 16,
+			center: new google.maps.LatLng({{ offices.0.get_latitude }}, {{ offices.0.get_longitude }}),
 			mapTypeId: google.maps.MapTypeId.ROADMAP
 		}
 		var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
