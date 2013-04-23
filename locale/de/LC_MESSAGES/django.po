@@ -69,7 +69,7 @@ msgstr "Betreffs"
 
 #: models.py:25 models.py:87 models.py:109
 msgid "Name"
-msgstr ""
+msgstr "Nachname"
 
 #: models.py:26
 msgid "URL"
@@ -90,7 +90,7 @@ msgstr ""
 #: models.py:34 templates/contacts/callback.html:25
 #: templates/contacts/page.html:100
 msgid "Send"
-msgstr "verschickt"
+msgstr "Senden"
 
 #: models.py:35
 msgid "Read"
@@ -256,8 +256,8 @@ msgid "Contacts"
 msgstr "Kontakt"
 
 #: templates/contacts/callback.html:15 templates/contacts/page.html:90
-msgid "Ihre Nachricht wurde nicht gesendet. Bitte ünerprüfen Sie Ihre Angaben!"
-msgstr ""
+msgid "The message not sent"
+msgstr "Ihre Nachricht wurde nicht gesendet. Bitte überprüfen Sie Ihre Angaben!"
 
 #: templates/contacts/page.html:45
 msgid "Contacts data"
