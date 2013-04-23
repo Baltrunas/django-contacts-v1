@@ -44,30 +44,10 @@ def contacts(request):
 			sendmsg.send()
 
 			context['ok'] = True
+			context['form'].save()
 			context['form'] = MessageForm()
-			context['name'] = context['formdate'].get('name', None)
-			Message(
-				name=context['formdate'].get('name', None),
-				phone=context['formdate'].get('phone', None),
-				email=context['formdate'].get('email', None),
-				url=context['formdate'].get('url', None),
-				subject=context['formdate'].get('subject', None),
-				msg=context['formdate'].get('msg', None),
-				ip=request.META.get('REMOTE_ADDR', None),
-				status='send'
-			).save()
 		else:
-			context['formdate'] = context['form'].cleaned_data
-			Message(
-				name=context['formdate'].get('name', None),
-				phone=context['formdate'].get('phone', None),
-				email=context['formdate'].get('email', None),
-				url=context['formdate'].get('url', None),
-				subject=context['formdate'].get('subject', None),
-				msg=context['formdate'].get('msg', None),
-				ip=request.META.get('REMOTE_ADDR', None),
-				status='error'
-			).save()
+			context['ok'] = False
 	else:
 		context['ok'] = False
 		context['form'] = MessageForm()

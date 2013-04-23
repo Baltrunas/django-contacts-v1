@@ -22,7 +22,14 @@ class Subject(models.Model):
 
 
 class Message(models.Model):
-	name = models.CharField(max_length=512, verbose_name=_('Name'))
+	SALUTATION_CHOICES = (
+		(True, _('Mr.')),
+		(False, _('Mrs.')),
+	)
+	salutation = models.BooleanField(_('Salutation'), default=False, choices=SALUTATION_CHOICES)
+	first_name = models.CharField(max_length=128, verbose_name=_('First Name'))
+	last_name = models.CharField(max_length=128, verbose_name=_('Last Name'))
+
 	url = models.URLField(max_length=256, blank=True, null=True, verbose_name=_('URL'), editable=False)
 	phone = models.CharField(max_length=32, verbose_name=_('Phone'))
 	email = models.EmailField(max_length=128, verbose_name=_('E-Mail'))
