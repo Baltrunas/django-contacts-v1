@@ -21,8 +21,8 @@ admin.site.register(Subject, SubjectAdmin)
 
 
 class MessageAdmin(admin.ModelAdmin):
-	list_display = ('id', 'name', 'phone', 'email', 'url', 'status', 'msg', 'ip', 'updated_at')
-	search_fields = ('id', 'name', 'phone', 'email', 'url', 'status', 'msg', 'ip', 'updated_at')
+	list_display = ('id', 'first_name', 'last_name', 'salutation', 'phone', 'email', 'url', 'status', 'msg', 'ip', 'updated_at')
+	search_fields = ('id', 'first_name', 'last_name', 'salutation', 'phone', 'email', 'url', 'status', 'msg', 'ip', 'updated_at')
 	list_filter = ['updated_at', 'status']
 	ordering = ['-updated_at']
 

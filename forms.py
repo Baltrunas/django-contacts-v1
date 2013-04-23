@@ -18,6 +18,14 @@ class Html5URLInput(Input):
 
 
 class MessageForm(ModelForm):
+	salutation = forms.TypedChoiceField(
+		label=_('Salutation'),
+		coerce=lambda x: True if x == 'True' else False,
+		initial=False,
+		choices=((False, _('Mrs.')), (True, _('Mr.'))),
+		widget=forms.RadioSelect
+	)
+
 	class Meta:
 		model = Message
 
@@ -25,7 +33,7 @@ class MessageForm(ModelForm):
 class CallBackForm(ModelForm):
 	class Meta:
 		model = CallBack
-		fields = ['salutation', 'last_name', 'first_name', 'subject', 'phone', 'from_time', 'to_time', 'msg']
+		fields = ['subject', 'salutation', 'first_name', 'last_name', 'from_time', 'to_time', 'phone', 'msg']
 
 
 class ContactForm(forms.Form):

@@ -1,28 +1,90 @@
 {% load i18n %}
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{% trans "Callback" %}</title>
+	<style>
+		html
+		{
+			margin: 0;
+			padding: 0;
+background: -moz-linear-gradient(top, rgba(228,245,252,0.2) 0%, rgba(191,232,249,0.15) 50%, rgba(159,216,239,0.15) 51%, rgba(42,176,237,0.1) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(228,245,252,0.2)), color-stop(50%,rgba(191,232,249,0.15)), color-stop(51%,rgba(159,216,239,0.15)), color-stop(100%,rgba(42,176,237,0.1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, rgba(228,245,252,0.2) 0%,rgba(191,232,249,0.15) 50%,rgba(159,216,239,0.15) 51%,rgba(42,176,237,0.1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, rgba(228,245,252,0.2) 0%,rgba(191,232,249,0.15) 50%,rgba(159,216,239,0.15) 51%,rgba(42,176,237,0.1) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, rgba(228,245,252,0.2) 0%,rgba(191,232,249,0.15) 50%,rgba(159,216,239,0.15) 51%,rgba(42,176,237,0.1) 100%); /* IE10+ */
+background: linear-gradient(to bottom, rgba(228,245,252,0.2) 0%,rgba(191,232,249,0.15) 50%,rgba(159,216,239,0.15) 51%,rgba(42,176,237,0.1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33e4f5fc', endColorstr='#1a2ab0ed',GradientType=0 ); /* IE6-9 */
+		}
+		body {
+			margin: 0;
+		}
+		ul {
+			list-style: none;
+			padding: 10px;
+			margin: 0;
+			display: block;
+			float: left;
+			min-height: 47px;
+		}
+		input, select, textarea {width: 250px;}
+		textarea {height: 100px;}
+		#submit{
+			display: block;
+			top: -55px;
+			position: relative;
+			height: 40px;
+			box-shadow: 0 0 5px #4eb2e9;
+			border: none;
+			display: block;
+			margin: 10px;
+			border-radius: 5px;
+			font-weight: bold;
+			font-size: 16px;
+			color: #fff;
+			text-transform: capitalize;
+			background: #4eb2e9;
+		}
 
-<style>
-	ul {list-style: none; padding: 0; margin: 0;}
-	input, select, textarea {width: 250px;}
-</style>
+		form
+		{
+			height: 340px;
+		}
 
-<div class='b-callback'>
-	{%if ok%}
-		<h3>{% trans "We received your message!" %}</h3>
-	{%else%}
-		<h3>{% trans "Call Back" %}</h3>
-		<form method="post" action="">
-			{% csrf_token %}
-			{%if form.errors %}<h3><strong>{% trans "The message is not sent!" %}</strong></h3>{% endif %}
-			{{ form.errors }}
-			{{ form.management_form }}
-			{% for field in form %}
-				{{ field.id }}
-				<ul>
-					<li>{{ field.label }}:</li>
-					<li>{{ field }}</li>
-				</ul>
-			{% endfor %}
-			<input type="submit" value='{% trans "Send" %}'>
-		</form>
-	{% endif %}
-</div>
+		#submit:hover{
+			background: #4eb2f9;
+			box-shadow: 0 0 10px #4ec2f9;
+		}
+
+		section
+		{
+			padding: 10px;
+			border: 4px solid #2ea2c9;
+		}
+	</style>
+</head>
+<body>
+	<section>
+		{%if ok%}
+			<h3>{% trans "We received your message!" %}</h3>
+		{%else%}
+			<h3>{% trans "Call Back" %}</h3>
+			<form method="post" action="">
+				{% csrf_token %}
+				{%if form.errors %}<h3><strong>{% trans "The message is not sent!" %}</strong></h3>{% endif %}
+				{{ form.errors }}
+				{{ form.management_form }}
+				{% for field in form %}
+					{{ field.id }}
+					<ul>
+						<li>{{ field.label }}:</li>
+						<li>{{ field }}</li>
+					</ul>
+				{% endfor %}
+				<input type="submit" value='{% trans "Send" %}' id='submit'>
+			</form>
+		{% endif %}
+	</section>
+</body>
+</html>
