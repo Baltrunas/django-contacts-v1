@@ -126,8 +126,8 @@ class Office(models.Model):
 
 	sites = models.ManyToManyField(Site, related_name='offices', verbose_name=_('Sites'))
 
-	latitude = models.DecimalField(verbose_name=_('Latitude'), max_digits=19, decimal_places=15, blank=True, null=True)			# Широта
-	longitude = models.DecimalField(verbose_name=_('Longitude'), max_digits=19, decimal_places=15, blank=True, null=True)		# Долгота
+	latitude = models.DecimalField(verbose_name=_('Latitude'), max_digits=19, decimal_places=15, blank=True, null=True)
+	longitude = models.DecimalField(verbose_name=_('Longitude'), max_digits=19, decimal_places=15, blank=True, null=True)
 
 	order = models.PositiveSmallIntegerField(verbose_name=_('Order'), default=500)
 	main = models.BooleanField(verbose_name=_('Main'), default=True)

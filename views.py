@@ -7,8 +7,6 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.mail import EmailMultiAlternatives
 from django.template import RequestContext
 
-from contacts.models import Message
-from contacts.models import CallBack
 from contacts.models import Office
 
 from contacts.forms import MessageForm
@@ -17,37 +15,39 @@ from contacts.forms import CallBackForm
 
 def contacts(request):
 	context = {}
-	context['offices'] = Office.objects.all()
+	context['offices'] = Office.objects.filter(public=True)
 
 	if request.method == 'POST':
 		context['form'] = MessageForm(request.POST)
 		if context['form'].is_valid():
-			context['formdate'] = context['form'].cleaned_data
-			context['ip'] = request.META.get('REMOTE_ADDR', None)
+			context['object'] = context['form'].save()
+			context['object'].ip = context['ip'] = request.META.get('REMOTE_ADDR', None)
 			context['referer'] = request.META.get('HTTP_REFERER', None)
-			email = context['formdate'].get('email', None)
 
-			form_subject = context['formdate'].get('subject', None)
-			context['form_subject'] = form_subject
+			context['form_subject'] = context['object'].subject
+			send_from = '%s <%s>' % (context['form_subject'].from_name, context['form_subject'].from_email)
 
-			send_from = '%s <%s>' % (form_subject.from_name, form_subject.from_email)
+			# Send User E-Mail
+			try:
+				user_subject = _('We received your message!')
+				user_email_tpl = render_to_string('contacts/email_user.html', context)
+				sendmsg = EmailMultiAlternatives(user_subject, user_email_tpl, send_from, [context['object'].email])
+				sendmsg.attach_alternative(user_email_tpl, "text/html")
+				sendmsg.send()
+			except:
+				pass
 
-			user_content = render_to_string('contacts/email_user.html', context)
-			user_subject = _('We received your message!')
-			sendmsg = EmailMultiAlternatives(user_subject, user_content, send_from, [email])
-			sendmsg.attach_alternative(user_content, "text/html")
-			sendmsg.send()
-
-			admin_content = render_to_string('contacts/email_admin.html', context)
-			sendmsg = EmailMultiAlternatives(form_subject.title, admin_content, send_from, [form_subject.email])
-			sendmsg.attach_alternative(admin_content, "text/html")
-			sendmsg.send()
+			# Send Admin E-Mail
+			try:
+				admin_email_tpl = render_to_string('contacts/email_admin.html', context)
+				sendmsg = EmailMultiAlternatives(context['form_subject'].title, admin_email_tpl, send_from, [context['form_subject'].email])
+				sendmsg.attach_alternative(admin_email_tpl, "text/html")
+				sendmsg.send()
+			except:
+				pass
 
 			context['ok'] = True
-			context['form'].save()
 			context['form'] = MessageForm()
-		else:
-			context['ok'] = False
 	else:
 		context['ok'] = False
 		context['form'] = MessageForm()
@@ -59,51 +59,24 @@ def callback(request):
 	context = {}
 	if request.method == 'POST':
 		context['form'] = CallBackForm(request.POST)
-		context['ip'] = request.META.get('REMOTE_ADDR', None)
 		if context['form'].is_valid():
-			context['formdate'] = context['form'].cleaned_data
-			form_subject = context['formdate'].get('subject', None)
-			context['form_subject'] = form_subject
+			context['object'] = context['form'].save()
+			context['object'].ip = context['ip'] = request.META.get('REMOTE_ADDR', None)
 
-			send_from = '%s <%s>' % (form_subject.from_name, form_subject.from_email)
+			context['form_subject'] = context['object'].subject
+			send_from = '%s <%s>' % (context['form_subject'].from_name, context['form_subject'].from_email)
 
-			admin_content = render_to_string('contacts/email_callback.html', context)
-			sendmsg = EmailMultiAlternatives(form_subject.title, admin_content, send_from, [form_subject.email])
-			sendmsg.attach_alternative(admin_content, "text/html")
-			sendmsg.send()
+			# Send E-Mail
+			try:
+				admin_content = render_to_string('contacts/email_callback.html', context)
+				sendmsg = EmailMultiAlternatives(context['form_subject'].title, admin_content, send_from, [context['form_subject'].email])
+				sendmsg.attach_alternative(admin_content, "text/html")
+				sendmsg.send()
+			except:
+				pass
 
 			context['ok'] = True
 			context['form'] = MessageForm()
-			context['name'] = context['formdate'].get('name', None)
-			CallBack(
-				salutation=context['formdate'].get('salutation', None),
-				first_name=context['formdate'].get('first_name', None),
-				last_name=context['formdate'].get('last_name', None),
-				subject=context['formdate'].get('subject', None),
-				phone=context['formdate'].get('phone', None),
-				from_time=context['formdate'].get('from_time', None),
-				to_time=context['formdate'].get('to_time', None),
-				msg=context['formdate'].get('msg', None),
-				ip=context['ip'],
-				status='wait'
-			).save()
-		else:
-			try:
-				context['formdate'] = context['form'].cleaned_data
-				CallBack(
-					salutation=context['formdate'].get('salutation', None),
-					first_name=context['formdate'].get('first_name', None),
-					last_name=context['formdate'].get('last_name', None),
-					subject=context['formdate'].get('subject', None),
-					phone=context['formdate'].get('phone', None),
-					from_time=context['formdate'].get('from_time', None),
-					to_time=context['formdate'].get('to_time', None),
-					msg=context['formdate'].get('msg', None),
-					ip=context['ip'],
-					status='error'
-				).save()
-			except:
-				pass
 	else:
 		context['ok'] = False
 		context['form'] = CallBackForm()

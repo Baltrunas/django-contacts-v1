@@ -1,5 +1,5 @@
-{% load getitem %}
-{% load i18n %}
+{% load object_dict %}
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -8,11 +8,10 @@
 	<body style='line-height: 1.5;'>
 		<p>{% trans "We received your message!" %}</p>
 		<hr>
-			<div style='background: #ffe; border: 1px solid silver; padding: 10px; margin: 10px; border-radius: 5px;'>
-			{% for field in form %}
-				<b>{{ field.label }}:</b> {{formdate|getitem:field.name}}<br>
+		<div style='background: #ffe; border: 1px solid silver; padding: 10px; margin: 10px; border-radius: 5px;'>
+			{% for field in object|object_dict %}
+				<b>{{ field.verbose_name }}</b> : {{ field.display }}<br>
 			{% endfor %}
-			<b>IP:</b> {{ip}}<br>
 			<b>HTTP referer:</b> {{referer}}<br>
 		</div>
 	</body>

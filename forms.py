@@ -49,10 +49,3 @@ class ContactForm(forms.Form):
 	service = forms.MultipleChoiceField(required=False, choices=SERVICE_CHOICES, widget=forms.widgets.CheckboxSelectMultiple)
 
 	msg = forms.CharField(required=False, widget=forms.Textarea())
-
-	# def clean_message(self):
-		# message = self.cleaned_data['message']
-		# num = len(message.split())
-		# if num < 4:
-			# raise forms.ValidationError('Слишком мало слов =(')
-		# return message
