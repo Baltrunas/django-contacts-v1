@@ -15,7 +15,8 @@ from contacts.forms import CallBackForm
 
 def contacts(request):
 	context = {}
-	context['offices'] = Office.objects.filter(public=True)
+	host = request.META.get('HTTP_HOST')
+	context['offices'] = Office.objects.filter(public=True, sites__domain__in=[host])
 
 	if request.method == 'POST':
 		context['form'] = MessageForm(request.POST)
