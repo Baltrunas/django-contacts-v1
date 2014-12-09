@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*
-from django.conf.urls import patterns
 from django.conf.urls import url
+from . import views
 
-urlpatterns = patterns('contacts.views',
-	url(r'^$', 'contacts', name='contacts'),
-	url(r'^callback/$', 'callback', name='callback'),
-)
+
+urlpatterns = [
+	url(r'^$', views.contacts, name='contacts'),
+	url(r'^callback/$', views.callback, name='callback'),
+]

@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
-from django.forms.widgets import Input
 from django import forms
 from django.utils.translation import ugettext as _
+
+from django.forms.widgets import Input
 from django.forms import ModelForm
-from contacts.models import Message
-from contacts.models import CallBack
+
+from .models import Message
+from .models import CallBack
 
 
 class Html5EmailInput(Input):

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*
 from django.shortcuts import render_to_response
 from django.template.loader import render_to_string
 
@@ -7,10 +6,10 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.mail import EmailMultiAlternatives
 from django.template import RequestContext
 
-from contacts.models import Office
+from .models import Office
 
-from contacts.forms import MessageForm
-from contacts.forms import CallBackForm
+from .forms import MessageForm
+from .forms import CallBackForm
 
 
 def contacts(request):

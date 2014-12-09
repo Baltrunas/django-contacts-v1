@@ -1,14 +1,12 @@
-# -*- coding: utf-8 -*
 from django.contrib import admin
-
-from contacts.models import Subject
-from contacts.models import Message
-from contacts.models import CallBack
-
-from contacts.models import Region
-from contacts.models import Office
-
 from django.contrib.sites.models import Site
+
+from .models import Subject
+from .models import Message
+from .models import CallBack
+
+from .models import Region
+from .models import Office
 
 
 class SubjectAdmin(admin.ModelAdmin):
