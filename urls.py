@@ -3,6 +3,6 @@ from . import views
 
 
 urlpatterns = [
-	url(r'^$', views.contacts, name='contacts'),
-	url(r'^callback/$', views.callback, name='callback'),
+	url(r'^$', views.contacts, name='contacts_contacts'),
+	url(r'^callback/$', views.callback, name='contacts_callback'),
 ]

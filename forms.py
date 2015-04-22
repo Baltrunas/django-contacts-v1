@@ -30,6 +30,7 @@ class MessageForm(ModelForm):
 
 	class Meta:
 		model = Message
+		fields = '__all__'
 
 
 class CallBackForm(ModelForm):
