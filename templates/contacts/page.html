@@ -37,7 +37,9 @@
 	}
 </script>
 
-<h1>{% trans "Contacts" %}</h1>
+<div class="b-wrapper">
+	<div class="b-page_inner">
+		<h1>{% trans "Contacts" %}</h1>
 	<div class="b-contacts-offices">
 	{% for office in offices %}
 		<div class="b-contacts-offices__office {% if office.main %}b-contacts-offices__office__main{% endif %}">
@@ -54,13 +56,13 @@
 			{% endif %}
 
 			{% if office.phone %}
-				<p>{% trans "Phone" %}: {{ office.phone }}</p>
+				<p><img src="/templates/img/icons/ic-phone-g.png" alt=""> {{ office.phone }}</p>
 			{% endif %}
 			{% if office.email %}
-				<p>{% trans "E-Mail" %}: {{ office.email }}</p>
+				<p><img src="/templates/img/icons/ic-mail-g.png" alt=""> {{ office.email }}</p>
 			{% endif %}
 			{% if office.address %}
-				<p>{% trans "Address" %}: {{ office.address }}</p>
+				<p><img src="/templates/img/icons/ic-address-g.png" alt=""> {{ office.address }}</p>
 			{% endif %}
 			{% if office.www %}
 				<p>{% trans "WWW" %}: {{ office.www }}</p>
@@ -98,8 +100,10 @@
 				<li>{{ field }}</li>
 			</ul>
 		{% endfor %}
-		<input type="submit" value='{% trans "Send" %}'>
+		<input class="b-contacts-form_submit" type="submit" value='{% trans "Send" %}'>
 	</form>
+</div>
+	</div>
 </div>
 
 <style>
