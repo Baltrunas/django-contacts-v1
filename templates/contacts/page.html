@@ -16,6 +16,7 @@
 		}
 		var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 		setMarkers(map, offices);
+		map.disableScrollWheelZoom();
 	}
 
 	function setMarkers(map, locations) {
