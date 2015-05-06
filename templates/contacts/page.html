@@ -45,8 +45,6 @@
 	{% for office in offices %}
 		<div class="b-contacts-offices__office {% if office.main %}b-contacts-offices__office__main{% endif %}">
 			<h3>{{ office.name }}</h3>
-			<h4>{% trans "Contacts data" %}:</h4>
-
 
 			{% if office.description %}
 				<p class='b-contacts-office__description'>{{ office.description|safe }}</p>
